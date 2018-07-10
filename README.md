@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/johncblandii/log4js-sumologic-appender/tree/master.svg?style=svg)](https://circleci.com/gh/johncblandii/log4js-sumologic-appender/tree/master)
+
 # log4js-sumologic-appender
 
 A simple log4js appender for SumoLogic.
