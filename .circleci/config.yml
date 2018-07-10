@@ -21,5 +21,14 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: npm run test
+      - run: npm run test:ci
       # - run: npm audit # enable when log4js audits successfully with loggly
+
+      - store_artifacts:
+          path: coverage
+          destination: coverage
+      - store_artifacts:
+          path: reports
+          destination: reports
+      - store_test_results:
+          path: reports/junit
