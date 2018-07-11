@@ -39,9 +39,12 @@ describe('appender', () => {
 
     logger.info({path: 'custom/path', value: 'log here'});
 
-    expect(SumoLogger.mock.instances[0].log).toHaveBeenCalledTimes(1);
-    expect(SumoLogger.mock.instances[0].log.mock.calls[0][0].path).toBe('custom/path');
-    expect(SumoLogger.mock.instances[0].log.mock.calls[0][0].value).toBe('log here');
+    let mockInstance = SumoLogger.mock.instances[0];
+    let logArgument = mockInstance.log.mock.calls[0][0];
+
+    expect(mockInstance.log).toHaveBeenCalledTimes(1);
+    expect(logArgument.path).toBe('custom/path');
+    expect(logArgument.value).toBe('log here');
   });
 
   test('all log levels work', () => {
