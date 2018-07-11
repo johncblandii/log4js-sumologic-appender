@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/johncblandii/log4js-sumologic-appender/tree/master.svg?style=svg)](https://circleci.com/gh/johncblandii/log4js-sumologic-appender/tree/master)
+[![CircleCI](https://circleci.com/gh/johncblandii/log4js-sumologic-appender/tree/master.svg?style=svg)](https://circleci.com/gh/johncblandii/log4js-sumologic-appender/tree/master) [![Maintainability](https://api.codeclimate.com/v1/badges/73fd2e8dcc79c645c55e/maintainability)](https://codeclimate.com/github/johncblandii/log4js-sumologic-appender/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/73fd2e8dcc79c645c55e/test_coverage)](https://codeclimate.com/github/johncblandii/log4js-sumologic-appender/test_coverage)
 
 # log4js-sumologic-appender
 
