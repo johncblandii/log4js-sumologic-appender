@@ -19,9 +19,30 @@ jobs:
       - save_cache:
           paths:
             - node_modules
+            - tmp
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: npm run test:ci
+      - run:
+          name: Initialize Code Climate
+          command: |
+            mkdir -p ci-tools/
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./ci-tools/codeclimate-reporter
+            chmod +x ./ci-tools/codeclimate-reporter
+
+      - run:
+          name: Run Tests
+          command: |
+            ./ci-tools/codeclimate-reporter before-build
+            npm run test:ci
+            ./ci-tools/codeclimate-reporter format-coverage -t lcov -o ci-tools/codeclimate.json coverage/lcov.info
+            ./ci-tools/codeclimate-reporter after-build --coverage-input-type lcov --exit-code $?
+
+      - run:
+          name: Update CodeClimate
+          command: |
+            ./ci-tools/codeclimate-reporter sum-coverage ci-tools/codeclimate.json -p $CIRCLE_NODE_TOTAL -o ci-tools/codeclimate.total.json
+            ./ci-tools/codeclimate-reporter upload-coverage -i ci-tools/codeclimate.total.json
+
       # - run: npm audit # enable when log4js audits successfully with loggly
 
       - store_artifacts:
