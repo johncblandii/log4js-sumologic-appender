@@ -1,6 +1,6 @@
 {
   "name": "log4js-sumologic-appender",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple log4js appender for SumoLogic",
   "main": "index.js",
   "scripts": {
