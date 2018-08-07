@@ -78,10 +78,9 @@ workflows:
     jobs:
       - build
       - deploy:
+          type: approval
           requires:
             - build
           filters:
-            tags:
-              only: /^v.*/
             branches:
-              ignore: /.*/
+              only: master
