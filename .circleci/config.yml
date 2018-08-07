@@ -77,10 +77,16 @@ workflows:
   build-deploy:
     jobs:
       - build
-      - deploy:
+      - deploy-approval:
           type: approval
           requires:
             - build
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - deploy-approval
           filters:
             branches:
               only: master
