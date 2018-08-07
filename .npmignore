@@ -1,0 +1,12 @@
+.circleci
+.github
+coverage
+reports
+.eslint.json
+.editorconfig
+.babelrc
+*.test.js
+jest.*
+yarn.lock
+*.log
+*.tgz
