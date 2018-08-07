@@ -43,7 +43,7 @@ jobs:
             ./ci-tools/codeclimate-reporter sum-coverage ci-tools/codeclimate.json -p $CIRCLE_NODE_TOTAL -o ci-tools/codeclimate.total.json
             ./ci-tools/codeclimate-reporter upload-coverage -i ci-tools/codeclimate.total.json
 
-      # - run: npm audit # enable when log4js audits successfully with loggly
+      - run: npm audit # enable when log4js audits successfully with loggly
 
       - store_artifacts:
           path: coverage
