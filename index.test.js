@@ -119,7 +119,6 @@ describe('appender', () => {
       const logger = sumoAppender.configure(config, layouts);
       logger(logEvent);
 
-      const mockInstance = SumoLogger.mock.instances[0];
       const instanceConfig = SumoLogger.mock.calls[0][0]
 
       expect(instanceConfig.alwaysIncludePattern).toBeFalsy();
@@ -132,7 +131,6 @@ describe('appender', () => {
       }, layouts);
       logger(logEvent);
 
-      const mockInstance = SumoLogger.mock.instances[0];
       const instanceConfig = SumoLogger.mock.calls[0][0]
 
       expect(instanceConfig.alwaysIncludePattern).toBeTruthy();

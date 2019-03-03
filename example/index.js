@@ -57,7 +57,7 @@ loggerWithSumo.fatal('fatal', 'extra', 'lines', {
 
 const metricsLogger = log4js.getLogger('metrics');
 
-for (var i = 0; i < 10, i++;) {
+for (var i = 0, len = 10; i < len; i++) {
   metricsLogger.info({
     path: 'my.metrics',
     value: i * Math.round(Math.random() * 100)
