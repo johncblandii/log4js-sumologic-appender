@@ -21,8 +21,6 @@ $ yarn add log4js-logentries-appender
 ``` js
   const log4js = require('log4js');
 
-  const logger = log4js.getLogger('My App Name'); // name your logger
-
   log4js.configure({
     appenders: {
       sumologic: {
@@ -39,6 +37,8 @@ $ yarn add log4js-logentries-appender
     }
   });
 
+  const logger = log4js.getLogger('My App Name'); // name your logger
+
   logger.trace('trace', 'extra', 'lines', {"json": "object here"});
   logger.debug('debug', 'extra', 'lines', {"json": "object here"});
   logger.info('info', 'extra', 'lines', {"json": "object here"});
@@ -46,3 +46,5 @@ $ yarn add log4js-logentries-appender
   logger.error('error', 'extra', 'lines', {"json": "object here"});
   logger.fatal('fatal', 'extra', 'lines', {"json": "object here"});
 ```
+
+See [example](example/) for a working example.

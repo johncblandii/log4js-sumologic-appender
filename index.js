@@ -1,8 +1,8 @@
 'use strict';
 
-export const name = 'log4js-sumologic-appender';
+const name = 'log4js-sumologic-appender';
 
-export const appender = (config, layout) => {
+const appender = (config, layout) => {
   return (logEvent) => {
     const SumoLogger = require('sumo-logger');
 
@@ -16,8 +16,7 @@ export const appender = (config, layout) => {
 
     if (config.graphite) {
       sumoLogger.log({
-        path: logEvent.data[0].path,
-        value: logEvent.data[0].value
+        ...logEvent.data[0],
       });
 
       return;
@@ -27,7 +26,7 @@ export const appender = (config, layout) => {
   };
 };
 
-export const configure = (config, layouts) => {
+const configure = (config, layouts) => {
   let layout = layouts.basicLayout;
 
   if (config.layout) {
@@ -40,3 +39,9 @@ export const configure = (config, layouts) => {
 
   return appender(config, layout);
 };
+
+module.exports = {
+  name,
+  appender,
+  configure,
+}
