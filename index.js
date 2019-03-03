@@ -6,7 +6,10 @@ export const appender = (config, layout) => {
   return (logEvent) => {
     const SumoLogger = require('sumo-logger');
 
-    let sumoConfig = {...config};
+    // Duplicate so we can edit without editing the original
+    let sumoConfig = {
+      ...config
+    };
     delete sumoConfig.type;
 
     const sumoLogger = new SumoLogger(sumoConfig);
@@ -20,7 +23,7 @@ export const appender = (config, layout) => {
       return;
     }
 
-    sumoLogger.log(layout(logEvent, config.timezoneOffset));
+    sumoLogger.log(layout ? layout(logEvent, config.timezoneOffset) : logEvent);
   };
 };
 
