@@ -1,5 +1,7 @@
 [![CircleCI](https://circleci.com/gh/johncblandii/log4js-sumologic-appender/tree/master.svg?style=svg)](https://circleci.com/gh/johncblandii/log4js-sumologic-appender/tree/master) [![Maintainability](https://api.codeclimate.com/v1/badges/73fd2e8dcc79c645c55e/maintainability)](https://codeclimate.com/github/johncblandii/log4js-sumologic-appender/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/73fd2e8dcc79c645c55e/test_coverage)](https://codeclimate.com/github/johncblandii/log4js-sumologic-appender/test_coverage)
 
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/johncblandii/log4js-sumologic-appender.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/johncblandii/log4js-sumologic-appender/alerts/) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/johncblandii/log4js-sumologic-appender.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/johncblandii/log4js-sumologic-appender/context:javascript)
+
 # log4js-sumologic-appender
 
 A simple log4js appender for SumoLogic.
@@ -19,8 +21,6 @@ $ yarn add log4js-logentries-appender
 ``` js
   const log4js = require('log4js');
 
-  const logger = log4js.getLogger('My App Name'); // name your logger
-
   log4js.configure({
     appenders: {
       sumologic: {
@@ -37,6 +37,8 @@ $ yarn add log4js-logentries-appender
     }
   });
 
+  const logger = log4js.getLogger('My App Name'); // name your logger
+
   logger.trace('trace', 'extra', 'lines', {"json": "object here"});
   logger.debug('debug', 'extra', 'lines', {"json": "object here"});
   logger.info('info', 'extra', 'lines', {"json": "object here"});
@@ -44,3 +46,5 @@ $ yarn add log4js-logentries-appender
   logger.error('error', 'extra', 'lines', {"json": "object here"});
   logger.fatal('fatal', 'extra', 'lines', {"json": "object here"});
 ```
+
+See [example](example/) for a working example.

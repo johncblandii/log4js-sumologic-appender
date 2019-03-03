@@ -1,0 +1,13 @@
+{
+  "name": "sumo-example",
+  "version": "1.0.0",
+  "description": "A working example of SumoLogic logging.",
+  "main": "index.js",
+  "author": "John C Bland II",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "log4js": "^4.0.2",
+    "sumologic-log4js-appender": "../"
+  }
+}

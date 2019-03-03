@@ -1,22 +1,28 @@
 'use strict';
 
-const sumologic = (config, layout) => {
+const name = 'log4js-sumologic-appender';
+
+const appender = (config, layout) => {
   return (logEvent) => {
     const SumoLogger = require('sumo-logger');
 
-    let sumoConfig = {...config};
+    // Duplicate so we can edit without editing the original
+    let sumoConfig = {
+      ...config
+    };
     delete sumoConfig.type;
 
     const sumoLogger = new SumoLogger(sumoConfig);
 
     if (config.graphite) {
       sumoLogger.log({
-        path: logEvent.data[0].path,
-        value: logEvent.data[0].value
+        ...logEvent.data[0],
       });
-    } else {
-      sumoLogger.log(layout(logEvent, config.timezoneOffset));
+
+      return;
     }
+
+    sumoLogger.log(layout ? layout(logEvent, config.timezoneOffset) : logEvent);
   };
 };
 
@@ -31,9 +37,11 @@ const configure = (config, layouts) => {
     config.alwaysIncludePattern = false;
   }
 
-  return sumologic(config, layout);
+  return appender(config, layout);
 };
 
-exports.name      = 'log4js-sumologic-appender';
-exports.appender  = sumologic;
-exports.configure = configure;
+module.exports = {
+  name,
+  appender,
+  configure,
+}

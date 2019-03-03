@@ -1,6 +1,6 @@
 {
   "name": "log4js-sumologic-appender",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "A simple log4js appender for SumoLogic",
   "main": "index.js",
   "scripts": {
@@ -18,15 +18,15 @@
   "author": "John C. Bland II",
   "license": "MIT",
   "dependencies": {
-    "sumo-logger": "^1.5.0"
+    "sumo-logger": "^2.1.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-jest": "^22.1.0",
-    "babel-preset-es2015": "^6.24.1",
-    "jest": "^23.2.0",
-    "jest-junit": "^3.6.0",
-    "log4js": "^3.0.2"
+    "@babel/core": "^7.3.4",
+    "babel-jest": "^24.1.0",
+    "@babel/preset-env": "^7.3.4",
+    "jest": "^24.1.0",
+    "jest-junit": "^6.3.0",
+    "log4js": "^4.0.2"
   },
   "jest-junit": {
     "output": "./reports/junit/junit.xml"
