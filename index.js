@@ -1,6 +1,8 @@
 'use strict';
 
-const sumologic = (config, layout) => {
+export const name = 'log4js-sumologic-appender';
+
+export const appender = (config, layout) => {
   return (logEvent) => {
     const SumoLogger = require('sumo-logger');
 
@@ -14,13 +16,15 @@ const sumologic = (config, layout) => {
         path: logEvent.data[0].path,
         value: logEvent.data[0].value
       });
-    } else {
-      sumoLogger.log(layout(logEvent, config.timezoneOffset));
+
+      return;
     }
+
+    sumoLogger.log(layout(logEvent, config.timezoneOffset));
   };
 };
 
-const configure = (config, layouts) => {
+export const configure = (config, layouts) => {
   let layout = layouts.basicLayout;
 
   if (config.layout) {
@@ -31,9 +35,5 @@ const configure = (config, layouts) => {
     config.alwaysIncludePattern = false;
   }
 
-  return sumologic(config, layout);
+  return appender(config, layout);
 };
-
-exports.name      = 'log4js-sumologic-appender';
-exports.appender  = sumologic;
-exports.configure = configure;

@@ -63,6 +63,6 @@ describe('appender', () => {
       expect(mockInstance.log.mock.calls[0][0]).toContain(`${logLevels[i]} ${i} extra lines { json: \'object here\' }`);
     }
 
-    expect(SumoLogger).toHaveBeenCalledTimes(6);
+    expect(SumoLogger).toHaveBeenCalledTimes(logLevels.length);
   });
 });
