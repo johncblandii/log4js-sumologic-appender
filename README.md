@@ -1,10 +1,6 @@
-[![CircleCI](https://circleci.com/gh/johncblandii/log4js-sumologic-appender/tree/master.svg?style=svg)](https://circleci.com/gh/johncblandii/log4js-sumologic-appender/tree/master)
+[![NPM](https://img.shields.io/npm/v/log4js-sumologic-appender.svg?style=for-the-badge)](https://www.npmjs.com/package/log4js-sumologic-appender) ![npm](https://img.shields.io/npm/dt/log4js-sumologic-appender.svg?style=for-the-badge) [![codecov](https://img.shields.io/codecov/c/github/johncblandii/log4js-sumologic-appender.svg?style=for-the-badge)](https://codecov.io/gh/johncblandii/log4js-sumologic-appender) ![CircleCI branch](https://img.shields.io/circleci/project/github/johncblandii/log4js-sumologic-appender/master.svg?style=for-the-badge)
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/73fd2e8dcc79c645c55e/maintainability)](https://codeclimate.com/github/johncblandii/log4js-sumologic-appender/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/73fd2e8dcc79c645c55e/test_coverage)](https://codeclimate.com/github/johncblandii/log4js-sumologic-appender/test_coverage)
-
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/johncblandii/log4js-sumologic-appender.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/johncblandii/log4js-sumologic-appender/alerts/) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/johncblandii/log4js-sumologic-appender.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/johncblandii/log4js-sumologic-appender/context:javascript)
-
-[![codecov](https://codecov.io/gh/johncblandii/log4js-sumologic-appender/branch/master/graph/badge.svg)](https://codecov.io/gh/johncblandii/log4js-sumologic-appender)
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/johncblandii/log4js-sumologic-appender.svg?style=for-the-badge) [![Total alerts](https://img.shields.io/lgtm/alerts/g/johncblandii/log4js-sumologic-appender.svg?style=for-the-badge&logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/johncblandii/log4js-sumologic-appender/alerts/) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/johncblandii/log4js-sumologic-appender.svg?style=for-the-badge&logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/johncblandii/log4js-sumologic-appender/context:javascript)
 
 # log4js-sumologic-appender
 
