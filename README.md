@@ -11,9 +11,9 @@ A simple log4js appender for SumoLogic with graphite metrics support.
 Install with `npm` or `yarn`:
 
 ```bash
-$ npm install --save log4js-logentries-appender
+$ npm install --save log4js-sumologic-appender
 
-$ yarn add log4js-logentries-appender
+$ yarn add log4js-sumologic-appender
 ```
 
 ## Example use
