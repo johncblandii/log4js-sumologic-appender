@@ -48,3 +48,18 @@ $ yarn add log4js-sumologic-appender
 ```
 
 See [example](example/) for a working example.
+
+#### Error handling
+
+In case requests to Sumo Logic fail, appender performs up to 10 retries. To override the default value for the number of retries add a `maxRetryCount` property to Sumo Logic appender config:
+
+``` js
+  sumologic: {
+    type: 'log4js-sumologic-appender',
+    endpoint: 'http://sumo/endpoint/here',
+    maxRetryCount: 5,
+    ...
+  }
+```
+
+If none of the retries are completed successfully, an error message will be written to stderr. 

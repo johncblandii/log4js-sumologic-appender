@@ -33,6 +33,9 @@ function getConfig(config) {
 describe('appender', () => {
   beforeEach(() => {
     SumoLogger.mockClear();
+    SumoLogger.prototype.log
+      .mockReset()
+      .mockReturnValue(Promise.resolve());
   });
 
   test('general', () => {
@@ -76,7 +79,7 @@ describe('appender', () => {
     });
 
     test('passes log event and timezone offset to layout', () => {
-      const timezoneOffset = "hi"
+      const timezoneOffset = "hi";
       const config = {
         timezoneOffset
       };
@@ -93,6 +96,39 @@ describe('appender', () => {
 
       let mockInstance = SumoLogger.mock.instances[0];
       expect(mockInstance.log).toHaveBeenNthCalledWith(1, layoutResult);
+    });
+
+    test('retries sending a log if an attempt fails', async () => {
+      const config = getConfig();
+      const logEvent = 'custom event';
+
+      SumoLogger.prototype.log
+        .mockReturnValueOnce(Promise.reject())
+        .mockReturnValueOnce(Promise.resolve());
+
+      const appender = sumoAppender.appender(config);
+      await expect(appender(logEvent)).resolves.toBe();
+
+      let mockInstance = SumoLogger.mock.instances[0];
+      expect(mockInstance.log).toHaveBeenCalledTimes(2);
+    });
+
+    test('writes a message to stderr if sending a log fails', async () => {
+      const config = getConfig();
+      const logEvent = 'custom event';
+      const error = 'some error';
+
+      SumoLogger.prototype.log.mockReturnValue(Promise.reject(error));
+      global.console.error = jest.fn();
+
+      const appender = sumoAppender.appender(config);
+      await expect(appender(logEvent)).resolves.toBe();
+
+      let mockInstance = SumoLogger.mock.instances[0];
+      expect(mockInstance.log).toHaveBeenCalledTimes(10);
+
+      const expectedMessage = `Sending event to Sumo Logic failed: ${error}, event: ${logEvent}`;
+      expect(console.error).toHaveBeenNthCalledWith(1, expectedMessage);
     });
   });
 
@@ -119,7 +155,7 @@ describe('appender', () => {
       const logger = sumoAppender.configure(config, layouts);
       logger(logEvent);
 
-      const instanceConfig = SumoLogger.mock.calls[0][0]
+      const instanceConfig = SumoLogger.mock.calls[0][0];
 
       expect(instanceConfig.alwaysIncludePattern).toBeFalsy();
     });
@@ -131,7 +167,7 @@ describe('appender', () => {
       }, layouts);
       logger(logEvent);
 
-      const instanceConfig = SumoLogger.mock.calls[0][0]
+      const instanceConfig = SumoLogger.mock.calls[0][0];
 
       expect(instanceConfig.alwaysIncludePattern).toBeTruthy();
     });
@@ -152,6 +188,24 @@ describe('appender', () => {
       expect(layouts.layout).toHaveBeenNthCalledWith(1, customLayout.type, customLayout);
       expect(layouts.basicLayout).not.toHaveBeenNthCalledWith(1, logEvent, timezoneOffset);
       expect(layoutHandler).toHaveBeenNthCalledWith(1, logEvent, timezoneOffset);
+    });
+
+    test('config.maxRetryCount overrides default max number of retries', async () => {
+      const config = getConfig();
+      config.maxRetryCount = 5;
+      const logEvent = 'custom event';
+      const error = 'some error';
+
+      SumoLogger.prototype.log.mockReturnValue(Promise.reject(error));
+
+      const appender = sumoAppender.appender(config);
+      await expect(appender(logEvent)).resolves.toBe();
+
+      const passedConfig = SumoLogger.mock.calls[0][0];
+      expect(passedConfig.maxRetryCount).toBeUndefined();
+
+      let mockInstance = SumoLogger.mock.instances[0];
+      expect(mockInstance.log).toHaveBeenCalledTimes(config.maxRetryCount);
     });
   });
 
@@ -191,6 +245,7 @@ describe('appender', () => {
         // Verify the mock was called only once
         expect(mockInstance.log).toHaveBeenCalledTimes(1);
         expect(mockInstance.log.mock.calls[0][0]).toContain(`${logLevels[i]} ${i} extra lines { json: \'object here\' }`);
+        SumoLogger.prototype.log.mockClear();
       }
 
       expect(SumoLogger).toHaveBeenCalledTimes(logLevels.length);
